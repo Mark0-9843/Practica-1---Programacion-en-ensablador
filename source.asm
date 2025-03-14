@@ -1,5 +1,8 @@
-; Example 1.1:
-; Writes "Hello World!" to the text display
+# TEAM markoboquiñechainajesu
+
+# ESTE CÓDIGO REALIZA
+
+# 14 / 03 / 2025 - V. 1. 0. 0 - PROGRAMACION EN ENSAMBLADOR
 
 	JMP boot
 
