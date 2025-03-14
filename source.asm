@@ -1,8 +1,8 @@
-# TEAM markoboquiñechainajesu
+; TEAM markoboquiñechainajesu
 
-# ESTE CÓDIGO REALIZA
+; ESTE CÓDIGO REALIZA
 
-# 14 / 03 / 2025 - V. 1. 0. 0 - PROGRAMACION EN ENSAMBLADOR
+; 14 / 03 / 2025 - V. 1. 0. 0 - PROGRAMACION EN ENSAMBLADOR
 
 	JMP boot
 
