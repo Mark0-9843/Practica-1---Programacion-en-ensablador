@@ -1,36 +1,55 @@
 ; TEAM markoboquiñechainajesu
 
-; ESTE CÓDIGO REALIZA UNA IMPRESION DEL MENSAJE "HOLA MUNDO"
+; ESTE CÓDIGO REALIZA UNA IMPRESION DEL MENSAJE "HOLA MUNDO" Y LUEGO DE UNA PAUSA IMPRIME EL MENSAJE "ADIOS MUNDO"
 
-; 14 / 03 / 2025 - V. 1. 0. 0 - PROGRAMACION EN ENSAMBLADOR
+; 14 / 03 / 2025 - V. 2. 0. 0 - PROGRAMACION EN ENSAMBLADOR
 
-	JMP boot
+	 JMP boot
 
-stackTop    EQU 0xFF    ; Initial SP
+stackTop    EQU 0xFF    ; Inicializa SP
 txtDisplay  EQU 0x2E0
 
-hello:	DB "Hello World!"	; Output string
-		DB 0				; String terminator
+txtHola:    DB "Hola Mundo!"    ; Primera salida
+            DB 0                ; Terminador de cadena
+
+txtAdios:   DB "Adios Mundo!"   ; Segunda salida
+            DB 0                ; Terminador de cadena
 
 boot:
-	MOV SP, stackTop	; Set SP
-	MOV C, hello		; Point register C to string
-	MOV D, txtDisplay	; Point register D to output
-	CALL print
-	HLT				; Halt execution
+    MOV SP, stackTop    ; Configurar SP
+    MOV C, txtHola      ; Apuntar C a "Hola Mundo!"
+    MOV D, txtDisplay   ; Apuntar D a la salida
+    CALL print
 
-print:				; Print string
-	PUSH A
-	PUSH B
-	MOV B, 0
+    CALL delay          ; Esperar un momento
+
+    MOV C, txtAdios     ; Apuntar C a "Adios Mundo!"
+    MOV D, txtDisplay   ; Apuntar D a la salida
+    CALL print
+
+    HLT                 ; Detener ejecución
+
+print:                  ; Imprimir cadena
+    PUSH A
+    PUSH B
+    MOV B, 0
 .loop:
-	MOVB AL, [C]	; Get character
-	MOVB [D], AL	; Write to output
-	INC C
-	INC D
-	CMPB BL, [C]	; Check if string terminator
-	JNZ .loop		; Jump back to loop if not
+    MOVB AL, [C]        ; Obtener carácter
+    MOVB [D], AL        ; Escribir en la salida
+    INC C
+    INC D
+    CMPB BL, [C]        ; Verificar si es el terminador
+    JNZ .loop           ; Repetir si no lo es
 
-	POP B
-	POP A
-	RET
+    POP B
+    POP A
+    RET
+
+delay:                  ; Rutina de retardo
+    PUSH A
+    MOV A, 0xFF
+.esperar:
+    DEC A
+    JNZ .wait
+    POP A
+    RET
