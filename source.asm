@@ -39,17 +39,17 @@ boot:
     MOV D, txtDisplay   ; Apuntar D a la salida
     CALL print          ; Limpiar pantalla
 
-    MOV C, txtSmile     ; Apuntar C a ":)"
+    MOV C, txtSmile     ; Apuntar C a ":)" Cargar la primera fase de la animación
     MOV D, txtDisplay
     CALL print
     CALL espera_corta    ; Pequeña pausa
 
-    MOV C, txtNeutral   ; Apuntar C a ":|"
+    MOV C, txtNeutral   ; Apuntar C a ":|" Cargar la segunda fase de la animación
     MOV D, txtDisplay
     CALL print
     CALL espera_corta    ; Pequeña pausa
 
-    MOV C, txtSad       ; Apuntar C a ":("
+    MOV C, txtSad       ; Apuntar C a ":(" Cargar la tercera fase de la animación
     MOV D, txtDisplay
     CALL print
     CALL espera_larga     ; Pausa más larga
@@ -61,14 +61,14 @@ boot:
     HLT                 ; Detener ejecución
 
 print:                  ; Imprimir cadena
-    PUSH A
-    PUSH B
+    PUSH A              ; Guardar valor de A en la pila
+    PUSH B              ; Guardar valor de B en la pila
     MOV B, 0
 .loop:
     MOVB AL, [C]        ; Obtener carácter
     MOVB [D], AL        ; Escribir en la salida
-    INC C
-    INC D
+    INC C               ; Apuntar al siguiente carácter
+    INC D               ; Avanzar en la pantalla
     CMPB BL, [C]        ; Verificar si es el terminador
     JNZ .loop           ; Repetir si no lo es
 
