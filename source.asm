@@ -1,6 +1,6 @@
 ; TEAM markoboquiñechainajesu
 
-; ESTE CÓDIGO REALIZA UNA ANIMACION SIMPLE Y REALIZA UNA PREGUNTA
+; ESTE CÓDIGO REALIZA UNA IMPRESION DE UN MENSAJE, LUEGO UNA ANIMACION SIMPLE Y AL FINAL OTRO MENSAJE.
 
 ; 14 / 03 / 2025 - V. 3. 0. 0 - PROGRAMACION EN ENSAMBLADOR
 
@@ -19,7 +19,7 @@ txtSmile:   DB ":)"  ; Primera fase de la animación
             DB 0      ;Terminador de cadena
 
 txtNeutral: DB ":|"  ; Segunda fase de la animación
-            DB 0        Terminador de cadena
+            DB 0        ;Terminador de cadena
 
 txtSad:     DB ":("  ; Tercera fase de la animación
             DB 0        ;Terminador de cadena
