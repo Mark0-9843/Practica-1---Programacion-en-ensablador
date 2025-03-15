@@ -31,7 +31,7 @@ boot:
     MOV SP, stackTop    ; Configurar SP
     MOV C, txtIntro     ; Apuntar C a "Esto es una animacion simple"
     MOV D, txtDisplay   ; Apuntar D a la salida
-    CALL print
+    CALL print          ;llama a la accion print
 
     CALL espera_larga     ; Esperar un poco
 
@@ -40,30 +40,30 @@ boot:
     CALL print          ; Limpiar pantalla
 
     MOV C, txtSmile     ; Apuntar C a ":)" Cargar la primera fase de la animación
-    MOV D, txtDisplay    
+    MOV D, txtDisplay    ; Apuntar D a la salida
     CALL print            ;Imprimir la carita sonriente
     CALL espera_corta    ; Pequeña pausa
 
     MOV C, txtNeutral   ; Apuntar C a ":|" Cargar la segunda fase de la animación
-    MOV D, txtDisplay
+    MOV D, txtDisplay   ; Apuntar D a la salida
     CALL print            ;Imprimir la carita neutral
     CALL espera_corta    ; Pequeña pausa
 
     MOV C, txtSad       ; Apuntar C a ":(" Cargar la tercera fase de la animación
-    MOV D, txtDisplay
+    MOV D, txtDisplay   ; Apuntar D a la salida
     CALL print        ;Imprimir la carita triste
     CALL espera_larga     ; Pausa más larga
 
     MOV C, txtEnd       ; Apuntar C a "le gusto la animacion?"
-    MOV D, txtDisplay
-    CALL print
+    MOV D, txtDisplay   ; Apuntar D a la salida
+    CALL print           ;Imprimir la carita triste
 
     HLT                 ; Detener ejecución
 
 print:                  ; Imprimir cadena
     PUSH A              ; Guardar valor de A en la pila
     PUSH B              ; Guardar valor de B en la pila
-    MOV B, 0
+    MOV B, 0           ;Mueve el valor 0 al registro B.
 .loop:
     MOVB AL, [C]        ; Obtener carácter
     MOVB [D], AL        ; Escribir en la salida
@@ -72,24 +72,24 @@ print:                  ; Imprimir cadena
     CMPB BL, [C]        ; Verificar si es el terminador
     JNZ .loop           ; Repetir si no lo es
 
-    POP B
-    POP A
-    RET
+    POP B               ;Extrae el valor en la cima de la pila y lo almacena en el registro B.
+    POP A               ;Extrae el valor en la cima de la pila y lo almacena en el registro A.
+    RET                 ;Retorna de la subrutina, tomando la dirección de retorno de la pila
 
 espera_corta:            ; Rutina de espera corto
-    PUSH A
-    MOV A, 0x50
-    CALL esperar
-    RET
+    PUSH A               ; Guardar valor de A en la pila
+    MOV A, 0x50          ;Carga el valor 0x50 (80 en decimal) en el registro A.
+    CALL esperar        ; Pausa 
+    RET                ; ;Retorna de la subrutina, tomando la dirección de retorno de la pila
 
 espera_larga:             ; Rutina de espera larga
-    PUSH A
-    MOV A, 0xFF
-    CALL esperar
-    RET
+    PUSH A               ; Guardar valor de A en la pila
+    MOV A, 0xFF          ; Carga el valor 0xFF (255 en decimal) en el registro A
+    CALL esperar         ;pausa 
+    RET                ; ;Retorna de la subrutina, tomando la dirección de retorno de la pila
     
 esperar:
-    DEC A
-    JNZ esperar
-    POP A
-    RET
+    DEC A              ; Decrementa el valor del registro A en 1.
+    JNZ esperar        ; Saltar si no es cero a espera
+    POP A              ;Extrae el valor en la cima de la pila y lo almacena en el registro A.
+    RET                ; ;Retorna de la subrutina, tomando la dirección de retorno de la pila
