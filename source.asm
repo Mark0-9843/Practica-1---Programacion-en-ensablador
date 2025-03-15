@@ -46,10 +46,10 @@ print:                  ; Imprimir cadena
     RET			;Retornar desde la subrutina
 
 delay:                  ; Rutina de retardo
-    PUSH A
-    MOV A, 0xFF
+    PUSH A		; Guardar el valor de A en la pila
+    MOV A, 0xFF		;Inicializar A con 0xFF
 .esperar:
-    DEC A
-    JNZ .wait
-    POP A
-    RET
+    DEC A		;Decrementar A
+    JNZ .wait		;Si A no es cero, continuar en el bucle
+    POP A		;Restarurar el valor original de A desde la pila
+    RET			;Retornar desde la subrutina
